@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=RocknRoll+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+    <title>Color Cycle App</title>
+  </head>
+  <body>
+    <div class="app-container">
+      <h1 class="main-title">Color Cycle</h1>
+      <div class="color-display"></div>
+      <form>
+        <label for="starting-color">From</label>
+        <input type="text" id="starting-color" placeholder="hex code" />
+        <label for="ending-color">To</label>
+        <input type="text" id="ending-color" placeholder="hex code" />
+        <label for="time-interval">Time interval</label>
+        <input type="number" class="time-interval" value="0.25" step="0.05" />
+
+        <button type="button" class="btn">Start</button>
+      </form>
+    </div>
+    <div class="color-codes-container">
+      <form>
+        <label for="hex">HEX</label>
+        <input type="radio" name="color-code" id="hex" value="hex" />
+        <label for="rgb">RGB</label>
+        <input type="radio" id="rgb" name="color-code" value="rgb" />
+        <label for="hsl">HSL</label>
+        <input type="radio" id="hsl" name="color-code" value="hsl" />
+      </form>
+    </div>
+  </body>
+</html>
