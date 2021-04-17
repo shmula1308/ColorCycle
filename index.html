@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans&family=RocknRoll+One&display=swap"
       rel="stylesheet"
     />
+    <script src="js/script.js" defer></script>
     <link rel="stylesheet" href="css/styles.css" />
     <link
       rel="stylesheet"
@@ -21,27 +22,44 @@
   <body>
     <div class="app-container">
       <h1 class="main-title">Color Cycle</h1>
-      <div class="color-display"></div>
+      <div class="color-display"><div class="ending-color"></div></div>
       <form>
-        <label for="starting-color">From</label>
-        <input type="text" id="starting-color" placeholder="hex code" />
-        <label for="ending-color">To</label>
-        <input type="text" id="ending-color" placeholder="hex code" />
-        <label for="time-interval">Time interval</label>
-        <input type="number" class="time-interval" value="0.25" step="0.05" />
-
-        <button type="button" class="btn">Start</button>
+        <div class="container">
+          <div class="input-group">
+            <label for="starting-color">From</label>
+            <input type="text" id="starting-color" placeholder="hex code" />
+          </div>
+          <div class="arrow-icon">
+            <i class="fas fa-long-arrow-alt-right"></i>
+          </div>
+          <div class="input-group">
+            <label for="ending-color">To</label>
+            <input type="text" id="ending-color" placeholder="hex code" />
+          </div>
+        </div>
+        <div class="interval-group">
+          <label for="time-interval">Time interval</label>
+          <input type="number" class="time-interval" value="0.25" step="0.05" />
+        </div>
+        <button type="button" class="btn" id="startButton">Start</button>
+        <button type="button" class="btn stopBtn" id="stopButton">Stop</button>
       </form>
     </div>
-    <div class="color-codes-container">
-      <form>
-        <label for="hex">HEX</label>
-        <input type="radio" name="color-code" id="hex" value="hex" />
-        <label for="rgb">RGB</label>
-        <input type="radio" id="rgb" name="color-code" value="rgb" />
-        <label for="hsl">HSL</label>
-        <input type="radio" id="hsl" name="color-code" value="hsl" />
-      </form>
-    </div>
+    <form class="color-codes-form">
+      <div class="color-codes-container">
+        <div class="color-group">
+          <label for="hex">HEX</label>
+          <input type="radio" name="color-code" id="hex" value="hex" checked />
+        </div>
+        <div class="color-group">
+          <label for="rgb">RGB</label>
+          <input type="radio" id="rgb" name="color-code" value="rgb" />
+        </div>
+        <div class="color-group">
+          <label for="hsl">HSL</label>
+          <input type="radio" id="hsl" name="color-code" value="hsl" />
+        </div>
+      </div>
+    </form>
   </body>
 </html>
