@@ -22,19 +22,21 @@
   <body>
     <div class="app-container">
       <h1 class="main-title">Color Cycle</h1>
-      <div class="color-display"><div class="ending-color"></div></div>
+      <div class="color-display">
+        <div class="alert"></div>
+      </div>
       <form>
         <div class="container">
           <div class="input-group">
             <label for="starting-color">From</label>
-            <input type="text" id="starting-color" placeholder="hex code" />
+            <input type="text" id="starting-color" placeholder="HEX code" />
           </div>
           <div class="arrow-icon">
             <i class="fas fa-long-arrow-alt-right"></i>
           </div>
           <div class="input-group">
             <label for="ending-color">To</label>
-            <input type="text" id="ending-color" placeholder="hex code" />
+            <input type="text" id="ending-color" placeholder="HEX code" />
           </div>
         </div>
         <div class="interval-group">
@@ -49,15 +51,34 @@
       <div class="color-codes-container">
         <div class="color-group">
           <label for="hex">HEX</label>
-          <input type="radio" name="color-code" id="hex" value="hex" checked />
+          <input
+            type="radio"
+            id="hex"
+            class="radioBtn"
+            name="color-code"
+            value="hex"
+            checked
+          />
         </div>
         <div class="color-group">
           <label for="rgb">RGB</label>
-          <input type="radio" id="rgb" name="color-code" value="rgb" />
+          <input
+            type="radio"
+            id="rgb"
+            class="radioBtn"
+            name="color-code"
+            value="rgb"
+          />
         </div>
         <div class="color-group">
           <label for="hsl">HSL</label>
-          <input type="radio" id="hsl" name="color-code" value="hsl" />
+          <input
+            type="radio"
+            id="hsl"
+            class="radioBtn"
+            name="color-code"
+            value="hsl"
+          />
         </div>
       </div>
     </form>

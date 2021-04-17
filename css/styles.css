@@ -51,15 +51,27 @@ input {
 .color-display {
   width: 700px;
   height: 450px;
-  background-color: azure;
   transition: all 1s ease;
   border: 2px dotted white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.ending-color {
-  display: none;
-  width: 100%;
-  height: 100%;
+.alert {
+  width: 350px;
+  height: 200px;
+  background-color: brown;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  transform: scale(0);
+}
+
+.display-alert {
+  transform: scale(1);
 }
 
 .main-title {
@@ -75,8 +87,8 @@ input {
 .color-group {
   width: 80px;
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-between;
   flex-direction: row-reverse;
 }
 
@@ -93,6 +105,7 @@ input {
 
 .arrow-icon {
   align-self: flex-end;
+  margin-bottom: 5px;
 }
 
 .interval-group {
