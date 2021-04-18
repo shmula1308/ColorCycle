@@ -6,73 +6,74 @@ const colorDisplay = document.querySelector('.color-display');
 const timeInterval = document.querySelector('.time-interval');
 const alert = document.querySelector('.alert');
 const radioBtns = document.querySelectorAll('.radioBtn');
-let button = {
+
+//Default checked radio button when page loads
+let colorCode = 'hex';
+
+// Keeping track of start/stop button
+const button = {
     start: false
 }
 
-let colorChange = {
+//Keeping track of which color is displayed on color display. It's used when we hit the start button. I had to use this use object because the returned value from colorDisplay.style.backgroundColor was formated differently than the value I was getting from startColorInput.value or endColorInput.value
+const colorChange = {
     endColor: false
 }
 
+// Timmy is used to stop to clear interval
 let timmy;
 
-startColorInput.addEventListener('focusout', isValidHEXColor);
-endColorInput.addEventListener('focusout', isValidHEXColor);
 
-radioBtns.forEach(radioBtn => {
-    radioBtn.addEventListener('input', switchColorCode)
+// Event: When user changes color codes with radio buttons we call switchColorCode(colorCode) and change the variable colorCode above
+
+document.querySelector('.color-codes-container').addEventListener('click', (ev) => {
+     if(ev.target.matches('input')) {
+        colorCode = ev.target.value;
+        switchColorCode(colorCode);
+     }
 })
 
 
-function switchColorCode(ev) {
-    if(ev.target.value === 'hex') {
+// switchColorCode function clears the input values, changes the placeholder values, and assigns a new string to colorCode variable
+function switchColorCode(colorCode) {
+    if(colorCode === 'hex') {
         startColorInput.value = "";
         endColorInput.value = "";
-        document.getElementById('hex').checked = true;
-        document.getElementById('rgb').checked = false;
-        document.getElementById('hsl').checked = false;
         startColorInput.placeholder = 'HEX value';
         endColorInput.placeholder = 'HEX value';
-        startColorInput.addEventListener('focusout', isValidHEXColor);
-        endColorInput.addEventListener('focusout', isValidHEXColor);
+        colorCode = 'hex'
+        
     }
-    if(ev.target.value === 'rgb') {
+    if(colorCode === 'rgb') {
         startColorInput.value = "";
         endColorInput.value = "";
-        document.getElementById('hex').checked = false;
-        document.getElementById('rgb').checked = true;
-        document.getElementById('hsl').checked = false;
         startColorInput.placeholder = 'RGB value';
         endColorInput.placeholder = 'RGB value';
-        startColorInput.addEventListener('focusout', isValidRGBColor);
-        endColorInput.addEventListener('focusout', isValidRGBColor);
+        colorCode = 'rgb'
     }
-    if(ev.target.value === 'hsl') {
+    if(colorCode === 'hsl') {
         startColorInput.value = "";
         endColorInput.value = "";
-        document.getElementById('hex').checked = false;
-        document.getElementById('rgb').checked = false;
-        document.getElementById('hsl').checked = true;
-
         startColorInput.placeholder = 'HSL value';
         endColorInput.placeholder = 'HSL value';
-        startColorInput.addEventListener('focusout', isValidHSLColor);
-        endColorInput.addEventListener('focusout', isValidHSLColor);
+        colorCode = 'hsl'
     }
-    console.log(ev.target.value)
+    
 }
 
 
-
+// RegExp validation of color codes. It returns false if match() method return null, alert the user, removes alert within 2 seconds. Else it return true
 function isValidHEXColor() {
     let str = startColorInput.value;
     if(str.match(/^#[a-f0-9]{6}$/i) === null) {
         alert.textContent = "Please enter a valid HEX value!"
         alert.classList.add('display-alert');
-    }
-    setTimeout(() => {
-        alert.classList.remove('display-alert');
-    },2000)
+        setTimeout(() => {
+            alert.classList.remove('display-alert');
+        },2000)
+        return false;
+    } 
+    return true;
 }
 
 function isValidRGBColor() {
@@ -80,10 +81,12 @@ function isValidRGBColor() {
     if(str.match(/^rgb\((\d+),(\d+),(\d+)\)$/) === null) {
         alert.textContent = "Please enter a valid RGB value!"
         alert.classList.add('display-alert');
+        setTimeout(() => {
+            alert.classList.remove('display-alert');
+        },2000)
+        return false;
     }
-    setTimeout(() => {
-        alert.classList.remove('display-alert');
-    },2000)
+    return true;
 }
 
 function isValidHSLColor() {
@@ -91,15 +94,38 @@ function isValidHSLColor() {
     if(str.match(/hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g) === null) {
         alert.textContent = "Please enter a valid HSL value!"
         alert.classList.add('display-alert');
+        setTimeout(() => {
+            alert.classList.remove('display-alert');
+        },2000)
+        return false;
     }
-    setTimeout(() => {
-        alert.classList.remove('display-alert');
-    },2000)
+   return true;
 }
 
 
-
+//Event: first we check for the validity of input. If false we stop everything from running by returning nothing.
+//Else, we grab time interval value, change colorDisplay to first color value, start the setInterval and pass it speed value multiplied by 1000 to convert it to miliseconds. Within setInterval function we check what is applied to colorDisaply and change it accordingly. We keep track of changes with the object colorChange
+//We change buttons from start to stop or vice versa.
 startBtn.addEventListener('click', () => {
+
+    if(colorCode === 'hex') {
+        if(!isValidHEXColor()) {
+            return;
+        }
+    } 
+
+    if(colorCode === 'rgb') {
+        if(!isValidRGBColor()) {
+            console.log(startColorInput.value)
+            return;
+        }
+    }
+    if(colorCode === 'hsl') {
+        if(!isValidHSLColor()) {
+            return;
+        }
+    } 
+
     let speed = timeInterval.value;
     colorDisplay.style.backgroundColor = startColorInput.value;
         timmy = setInterval(() => {   
